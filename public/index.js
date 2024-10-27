@@ -192,24 +192,22 @@ async function endGamePopup(isWinner) {
     if (definition)
       wordDefinition.innerText = definition; // Set the definition text once resolved
     else
-    wordDefinition.innerHTML = `No definition found.<br><a target="_blank" href="https://www.google.com/search?q=${word}+definition">Search Online</a>`;
+    wordDefinition.innerHTML = `No definition found.<br><a target="_blank" id="searchDef" href="https://www.google.com/search?q=${word}+definition">Search Online</a>`;
   } catch (error) {
     console.error(error);
-    wordDefinition.innerHTML = `No definition found.<br><a target="_blank" href="https://www.google.com/search?q=${word}+definition">Search Online</a>`;
+    wordDefinition.innerHTML = `No definition found.<br><a target="_blank" id="searchDef" href="https://www.google.com/search?q=${word}+definition">Search Online</a>`;
   }
 
   if (isWinner) {
-    endTitle.innerText = 'Won';
+    endTitle.innerText = 'You Guessed:';
   } else {
-    endTitle.innerText = 'Lost';
+    endTitle.innerText = 'The word was:';
   }
   setTimeout(() => {
     endScreenContainer.style.display = 'flex';
-    notAffiliated.style.color = 'white';
-    //notAffiliated.style.filter = 'brightness(1.5)';
+    notAffiliated.style.color = '#818384';
     contactAs.forEach(link => {
-      //link.style.filter = 'brightness(1.5)';
-      link.style.color = 'white';
+      link.style.color = '#818384';
     });
   }, 400)
 }

@@ -1,4 +1,5 @@
-@import url('https://fonts.cdnfonts.com/css/k22-karnak-deco');
+@import url('https://fonts.cdnfonts.com/css/garamond');
+@import url('https://fonts.cdnfonts.com/css/gt-super-ds-trial');
 
 body, html {
     background-color: #121213;
@@ -10,7 +11,7 @@ body, html {
 header {
     border-bottom: 1.5px solid #3A3A3C;
     padding: 0.5rem;
-    font-family: "K22 Karnak Deco";
+    font-family: "GT Super Ds Trial";
     color: white;
     display: flex;
     flex-direction: row;
@@ -99,6 +100,7 @@ main {
   align-items: center;
   margin-left: 8px;
   margin-bottom: 8px;
+  font-weight: bold;
 }
 
 /* Center rows to mimic QWERTY layout */
@@ -118,11 +120,11 @@ main {
 }
 
 .correctLetter {
-  background-color: green!important;
+  background-color: #6a994e!important;
 }
 
 .correctLetterWrongPos {
-  background-color: orange!important;
+  background-color: #ffa500!important;
 }
 
 .incorrectLetter {
@@ -157,7 +159,7 @@ main {
 }
 
 #endTitle {
-  font-family: "K22 Karnak Deco";
+  font-family: "GT Super Ds Trial";
   margin: 0;
   font-size: 40px;
   padding: 10px;
@@ -169,7 +171,7 @@ main {
 
 #wordDefinition {
   color: #818384;
-  font-family: "K22 Karnak Deco";
+  font-family: "GT Super Ds Trial";
   font-size: 18px;
   text-align: center;
   padding: 10px;
@@ -183,9 +185,20 @@ main {
   height: 40px;
   border: 0;
   border-radius: 5px;
-  background-color: yellow;
-  font-family: "K22 Karnak Deco";
+  background-color:#6a994e;
+  color: white;
+  font-family: "GT Super Ds Trial";
   text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#searchDef {
+  color:#ffa500;
+}
+
+#searchDef:visited {
+  color:#818384;
 }
 
 #contact {
