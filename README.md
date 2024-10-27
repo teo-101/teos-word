@@ -1,3 +1,5 @@
 # Guess Teo's Word
-![image](https://github.com/user-attachments/assets/2def0216-9092-4e15-a882-3492a623a027)<br>
-![image](https://github.com/user-attachments/assets/d0018348-ab7e-48ac-87d2-f4b42590672c)<br>
+![image](https://github.com/user-attachments/assets/9ca458a3-660e-411b-807b-781d2ac2526f)<br>
+![image](/public/images/logov2.png)
+![image](/public/images/logov3.png)
+![image](/public/images/logov4.png)<br>
