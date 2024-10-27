@@ -103,16 +103,6 @@ main {
   font-weight: bold;
 }
 
-/* Center rows to mimic QWERTY layout */
-#keyboardContainer tr:nth-child(2) {
-  margin-left: 20px; /* Offset for middle row */
-}
-
-#keyboardContainer tr:nth-child(3) {
-  margin-left: 40px; /* Offset for bottom row */
-}
-
-
 #guidePopup {
     display: none;
     color:white;
@@ -236,4 +226,20 @@ main {
   margin: 0;
   z-index: 999;
   position: relative;
+}
+
+#Backspace {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#Backspace img{
+  width: 25px;
+}
+
+#Enter {
+  width: fit-content!important;
+  padding-left: 5px;
+  padding-right: 5px;
 }

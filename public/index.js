@@ -32,12 +32,7 @@ let wordMatched;
 let gameEnd = false;
 
 function letterExist(letter, word) {
-  for (let i = 0; i < word.length; i++) {
-    if (letter === word[i]) {
-      return true;
-    }
-  }
-  return false;
+  return word.includes(letter);
 }
 
 function wordMatch(currentWord, setWord) {
@@ -64,7 +59,7 @@ function wordMatch(currentWord, setWord) {
     }
     else {
       if (currentTry >= numOfTries) {
-        console.log("Try again tommorow");
+        console.log("Try again tomorrow");
         gameEnd = true;
         endGamePopup(wordMatched);
       }
@@ -75,7 +70,7 @@ function wordMatch(currentWord, setWord) {
 
 function updateGameLine(currentTry, currentWord, setWord) {
   console.log(gameMatrix);
-  gameMatrix[currentTry].forEach((letter,index) => {
+  gameMatrix[currentTry].forEach((letter, index) => {
     letter.innerText = currentWord[index];
     if (currentWord[index] === setWord[index]) {
       // Add Correct Letter Class
@@ -99,15 +94,26 @@ function updateGameLine(currentTry, currentWord, setWord) {
 let currentWordIndex = -1;
 
 document.addEventListener("keydown", (event) => {
-  if (event.key.length === 1 && event.key.match(/[a-zA-Z]/) && gameEnd === false) {
+  handleKeyPress(event.key);
+});
+
+// Add click event listeners for custom keyboard keys
+keys.forEach(key => {
+  key.addEventListener('click', () => {
+    handleKeyPress(key.id); // Use the id of the clicked key
+  });
+});
+
+function handleKeyPress(key) {
+  if (key.length === 1 && key.match(/[a-zA-Z]/) && gameEnd === false) {
     if (currentWordIndex < 4 && gameEnd === false) {
       currentWordIndex++;
-      gameMatrix[currentTry][currentWordIndex].innerText = event.key.toUpperCase();
-      currentWord += String(event.key.toUpperCase());
+      gameMatrix[currentTry][currentWordIndex].innerText = key.toUpperCase();
+      currentWord += String(key.toUpperCase());
       console.log(currentWord);
     }
   }
-  if (event.key === "Enter" && currentWordIndex === 4 && gameEnd === false) {
+  if (key === "Enter" && currentWordIndex === 4 && gameEnd === false) {
     arrayOfTries[currentTry] = currentWord;
     console.log(arrayOfTries);
     updateGameLine(currentTry, currentWord, word);
@@ -115,13 +121,13 @@ document.addEventListener("keydown", (event) => {
     currentWordIndex = -1;
     currentWord = '';
   }
-  if ((event.key === 'Backspace' || event.key === 'Delete' && gameEnd === false) && currentWordIndex >= 0) {
+  if ((key === 'Backspace' || key === 'Delete') && currentWordIndex >= 0) {
     gameMatrix[currentTry][currentWordIndex].innerText = '';
     currentWordIndex--;
     currentWord = currentWord.slice(0, -1);
     console.log(currentWord);
   }
-});
+}
 
 // Fetch word from API
 function getWord() {
@@ -185,14 +191,14 @@ const contactAs = document.querySelectorAll('#contact a');
 const notAffiliated = document.getElementById('notAffiliated');
 
 async function endGamePopup(isWinner) {
-  endWord.innerText = `" ${word} "`;
+  endWord.innerText = `" ${word} "`; // Display the word
 
   try {
     const definition = await getWordDefinition(word); // Await the definition here
     if (definition)
       wordDefinition.innerText = definition; // Set the definition text once resolved
     else
-    wordDefinition.innerHTML = `No definition found.<br><a target="_blank" id="searchDef" href="https://www.google.com/search?q=${word}+definition">Search Online</a>`;
+      wordDefinition.innerHTML = `No definition found.<br><a target="_blank" id="searchDef" href="https://www.google.com/search?q=${word}+definition">Search Online</a>`;
   } catch (error) {
     console.error(error);
     wordDefinition.innerHTML = `No definition found.<br><a target="_blank" id="searchDef" href="https://www.google.com/search?q=${word}+definition">Search Online</a>`;
@@ -211,4 +217,3 @@ async function endGamePopup(isWinner) {
     });
   }, 400)
 }
-
