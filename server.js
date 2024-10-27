@@ -1,7 +1,6 @@
 require("dotenv").config();
 
 const express = require("express"); // Server
-const mongoose = require("mongoose"); // Future connection to mongoDB
 const cors = require("cors"); // Cross-Origin Resource Sharing to fetch from the backend to frontend.
 const https = require("https");
 const path = require("path");
@@ -85,5 +84,27 @@ app.get('/api/definition/:word', (req, res) => {
   }
   else {
     return res.status(400).json({message: "Invalid request data"});
+  }
+});
+
+const mongoose = require('./db');
+const pastWords = require('./models/PastWords');
+
+app.post('/pastWords', async (req,res) => {
+  try {
+    const dbWord = new pastWords(req.body); // New past Word instance
+    await dbWord.save(); // Save the user to the db
+    res.status(201).send(dbWord);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
+app.get('/pastWords', async (req,res) => {
+  try {
+    const pastWordsDb = await pastWords.find(); // All past words
+    res.status(200).send(pastWordsDb);
+  } catch (error) {
+    res.status(500).send(error);
   }
 });

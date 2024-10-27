@@ -143,7 +143,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #3A3A3C;
+  background-color: rgba(58, 58, 60, 1);
   position: absolute;
   top: 10vh;
   color: white;
