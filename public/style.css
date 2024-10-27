@@ -5,7 +5,7 @@ body, html {
     background-color: #121213;
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 header {
@@ -57,6 +57,7 @@ main {
     margin-top: 20px;
     border-collapse: separate; /* Ensure borders are separated */
     border-spacing: 5px; /* Add spacing between table cells */
+    font-weight: bold;
 }
 
 #tableContainer td {
@@ -136,7 +137,7 @@ main {
 }
 
 #endMenu {
-  width: 22vw;
+  width: 40vw;
   min-height: 52vh;
   height: fit-content;
   display: flex;
@@ -146,6 +147,7 @@ main {
   position: absolute;
   top: 10vh;
   color: white;
+  text-align: center;
 }
 
 #endTitle {
@@ -232,6 +234,8 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 #Backspace img{
@@ -242,4 +246,25 @@ main {
   width: fit-content!important;
   padding-left: 5px;
   padding-right: 5px;
+}
+
+@media only screen and (max-width: 768px) {
+  #keyboardContainer td {
+    width: 30px;
+  }
+
+  #endMenu {
+    width: 80vw;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  #keyboardContainer td {
+    scale: 0.9;
+    margin-left: 0px;
+    margin-bottom: 0px;
+  }
+  #keyboardContainer table {
+    border-spacing: 1px;
+  }
 }
