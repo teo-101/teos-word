@@ -182,13 +182,10 @@ const endTitle = document.getElementById('endTitle');
 const endWord = document.getElementById('endWord');
 const wordDefinition = document.getElementById('wordDefinition');
 const contactAs = document.querySelectorAll('#contact a');
+const notAffiliated = document.getElementById('notAffiliated');
 
 async function endGamePopup(isWinner) {
   endWord.innerText = `" ${word} "`;
-  contactAs.forEach(link => {
-    link.style.filter = 'brightness(1.5)';
-    link.style.color = 'white';
-  });
 
   try {
     const definition = await getWordDefinition(word); // Await the definition here
@@ -208,6 +205,12 @@ async function endGamePopup(isWinner) {
   }
   setTimeout(() => {
     endScreenContainer.style.display = 'flex';
+    notAffiliated.style.color = 'white';
+    //notAffiliated.style.filter = 'brightness(1.5)';
+    contactAs.forEach(link => {
+      //link.style.filter = 'brightness(1.5)';
+      link.style.color = 'white';
+    });
   }, 400)
 }
 
