@@ -217,3 +217,17 @@ async function endGamePopup(isWinner) {
     });
   }, 400)
 }
+
+const settingsBtn = document.getElementById('settings');
+const settingsContainer = document.getElementById('settingsContainer');
+const closeBtn = document.getElementById('closeBtn');
+
+settingsBtn.addEventListener("click", () => settingsMenu());
+
+closeBtn.addEventListener("click", () => {
+  settingsContainer.style.display = 'none';
+});
+
+function settingsMenu() {
+  settingsContainer.style.display = 'flex';
+}

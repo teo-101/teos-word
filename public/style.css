@@ -263,6 +263,73 @@ main {
   padding-right: 5px;
 }
 
+#settingsContainer {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#settingsMenu {
+  width: 30vw;
+  min-height: 40vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: fit-content;
+  background-color: #3A3A3C;
+  padding: 20px;
+  z-index: 1000;
+
+  h1, h2, p {
+    text-align: center;
+    color:white;
+    font-family: 'Gt Super Ds Trial';
+  }
+
+  h1 {
+    margin-top: 0;
+  }
+
+  p {
+    font-weight: bold;
+    color: #818384;
+    font-family: monospace;
+    letter-spacing: 1px;
+  }
+
+  select {
+    background-color:#3A3A3C;
+    color: white;
+    height: 6vh;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: monospace;
+    letter-spacing: 1px;
+  }
+}
+
+#attributesContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column-reverse;
+
+  a {
+    color: #818384;
+  }
+}
+
+#closeBtn {
+  position: relative;
+  align-self: self-end;
+}
+
 @media only screen and (max-width: 768px) {
   #keyboardContainer td {
     width: 30px;
@@ -270,6 +337,14 @@ main {
 
   #endMenu {
     width: 80vw;
+  }
+
+  #settingsMenu {
+    width: 80vw;
+  }
+
+  #settingsMenu a {
+    margin-bottom: 5px;
   }
 }
 
