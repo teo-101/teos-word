@@ -31,13 +31,28 @@ header h1 {
     font-weight: bolder;
 }
 
-header a {
-    position: absolute;
-    justify-self: center;
+#navLeft {
+  position: absolute;
+  left: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#navRight {
+  position: absolute;
+  right: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#settings {
+  margin-left: 10px;
 }
 
 #playGuide {
-    left: 15px;
+  margin-left: 10px;
 }
 
 #settings {
