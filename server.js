@@ -78,7 +78,7 @@ app.get('/api/definition/:word', (req, res) => {
         }
       }).on('error', (error) => {
         console.error("Error with def API request", error);
-    res.status(500).json({ message: "Internal server error def API"});
+        res.status(500).json({ message: "Internal server error def API"});
       });
     });
   }
@@ -100,11 +100,66 @@ app.post('/pastWords', async (req,res) => {
   }
 });
 
-app.get('/pastWords', async (req,res) => {
+app.get('/pastWords', async (req, res) => {
   try {
     const pastWordsDb = await pastWords.find(); // All past words
     res.status(200).send(pastWordsDb);
   } catch (error) {
     res.status(500).send(error);
+  }
+});
+
+app.get('/lastEntry', async (req, res) => {
+  try {
+    const latestEntry = await pastWords.findOne().sort({ date: -1 });
+    if (!latestEntry) {
+      return res.status(404).json({ message: "No entries found in the database" });
+    }
+    res.status(200).json(latestEntry);
+  } catch (error) {
+    console.error("Error fetching latest entry from the database:", error);
+    res.status(500).json({ message: "Server error fetching latest entry" });
+  }
+});
+
+
+app.post('/updateDatabase', async (req, res) => {
+  try {
+    // Fetch a random word from the API
+    const url = 'https://random-word-api.herokuapp.com/word?number=1&length=5';
+    
+    https.get(url, (apiRes) => {
+      let data = '';
+
+      // Collect data from the API response
+      apiRes.on('data', (chunk) => {
+        data += chunk;
+      });
+
+      // Handle the end of the API response
+      apiRes.on('end', async () => {
+        try {
+          const [randomWord] = JSON.parse(data); // Get the single word returned in an array
+          
+          // Create a new database entry with the word
+          const dailyWord = new pastWords({ word: randomWord });
+          await dailyWord.save();
+
+          // Respond with the saved word
+          res.status(201).send(dailyWord);
+        } catch (error) {
+          console.error("Error parsing json response from word API", error);
+          res.status(500).json({ message: "Failed to parse response from word API" });
+        }
+      });
+      
+    }).on('error', (error) => {
+      console.error("Error with API request", error);
+      res.status(500).json({ message: "Error fetching random word" });
+    });
+
+  } catch (error) {
+    console.error("Error saving daily word:", error);
+    res.status(400).send(error);
   }
 });

@@ -231,3 +231,24 @@ closeBtn.addEventListener("click", () => {
 function settingsMenu() {
   settingsContainer.style.display = 'flex';
 }
+
+async function wordFromDb() {
+  try {
+    const response = await fetch('/lastEntry'); // Ensure this matches your server's base URL if necessary
+    if (!response.ok) {
+      throw new Error('Failed to fetch the latest word');
+    }
+    const latestWord = await response.json();
+    console.log('Latest word from DB:', latestWord.word.toUpperCase());
+    word = latestWord.word.toUpperCase();
+    // You can update your UI here, e.g., display the word in an element
+  } catch (error) {
+    console.error('Error fetching latest word from DB:', error);
+  }
+}
+
+const homeBtn = document.getElementById('home');
+
+homeBtn.addEventListener("click", () => {
+  wordFromDb();
+});

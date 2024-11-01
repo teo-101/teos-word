@@ -5,14 +5,11 @@ const pastWordsSchema = new mongoose.Schema({
   word: { type: String, required: true },
   date: {
     type: Date,
-    default: function () {
-      const today = new Date();
-      return today.toLocaleDateString();
-    },
+    default: Date.now // Store the actual date object instead of a formatted string
   },
 });
 
 // Create model
-const pastWord = mongoose.model('pastWord', pastWordsSchema);
+const PastWord = mongoose.model('PastWord', pastWordsSchema);
 
-module.exports = pastWord;
+module.exports = PastWord;
