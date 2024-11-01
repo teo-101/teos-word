@@ -220,12 +220,15 @@ async function endGamePopup(isWinner) {
 
 const settingsBtn = document.getElementById('settings');
 const settingsContainer = document.getElementById('settingsContainer');
-const closeBtn = document.getElementById('closeBtn');
+const closeBtn = document.querySelectorAll('.closeBtn');
 
 settingsBtn.addEventListener("click", () => settingsMenu());
 
-closeBtn.addEventListener("click", () => {
-  settingsContainer.style.display = 'none';
+closeBtn.forEach(btn => {
+  btn.addEventListener("click", () => {
+    settingsContainer.style.display = 'none';
+    pastWordsContainer.style.display = 'none';
+  });
 });
 
 function settingsMenu() {
@@ -251,4 +254,36 @@ const homeBtn = document.getElementById('home');
 
 homeBtn.addEventListener("click", () => {
   wordFromDb();
+});
+
+const pastWordsBtn = document.getElementById('pastWordsBtn');
+const pastWordsContainer = document.getElementById('pastWordsContainer');
+const wordContainer = document.getElementById('wordContainer');
+
+pastWordsBtn.addEventListener("click", () => {
+  pastWordsContainer.style.display = 'flex';
+  return fetch(`/pastWords`, {
+    method: "GET",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  })
+  .then(res => {
+    if (!res.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return res.json();
+  })
+  .then(data => {
+    let i = 1;
+    while (i < 8 && data[i]) {
+      wordContainer.innerHTML += `<div class="wordsPastContainer"><p class="pastDays">${i} days ago</p><p class="wordsFromThePast">" ${data[i].word.toUpperCase()} "</p></div>`;
+      i++;
+    }
+    console.log(data);
+  })
+  .catch(error => {
+    console.error('There has been a problem with your fetch operation:', error);
+    return false;
+  });
 });

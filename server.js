@@ -97,7 +97,7 @@ app.post('/pastWords', async (req,res) => {
 
 app.get('/pastWords', async (req, res) => {
   try {
-    const pastWordsDb = await pastWords.find(); // All past words
+    const pastWordsDb = await pastWords.find().sort({ date: -1}); // All past words
     res.status(200).send(pastWordsDb);
   } catch (error) {
     res.status(500).send(error);

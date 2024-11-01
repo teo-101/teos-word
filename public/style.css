@@ -325,9 +325,64 @@ main {
   }
 }
 
-#closeBtn {
+.closeBtn {
   position: relative;
   align-self: self-end;
+}
+
+#pastWordsContainer {
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#pastWordsMenu {
+  min-width: 30vw;
+  min-height: 40vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: fit-content;
+  width: fit-content;
+  background-color: #3A3A3C;
+  padding: 20px;
+  z-index: 1000;
+}
+
+#wordContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.wordsPastContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  font-family: 'Gt Super Ds Trial';
+  color: white;
+}
+
+.wordsFromThePast {
+  font-size: 25px;
+  margin-left: 50px;
+}
+
+.pastDays {
+  color: #818384;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#pastWordsTitle {
+  color: white;
+  text-align: center;
+  font-family: 'Gt Super Ds Trial';
 }
 
 @media only screen and (max-width: 768px) {
@@ -345,6 +400,14 @@ main {
 
   #settingsMenu a {
     margin-bottom: 5px;
+  }
+
+  #pastWordsMenu {
+    width: 80vw;
+  }
+
+  header h1 {
+    font-size: 5.5vw;
   }
 }
 
