@@ -18,11 +18,6 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
-
 // Making an endpont for the api response
 app.post('/api/getWords', (req, res) => {
   const { numberOfWords, length } = req.body;
@@ -162,4 +157,45 @@ app.post('/updateDatabase', async (req, res) => {
     console.error("Error saving daily word:", error);
     res.status(400).send(error);
   }
+});
+
+// Function to call the /updateDatabase endpoint
+const callUpdateDatabase = async () => {
+  try {
+    const response = await fetch(`http://localhost:${PORT}/updateDatabase`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    const options = { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric', 
+      hour: '2-digit', 
+      minute: '2-digit', 
+      second: '2-digit', 
+      hour12: false // Use 24-hour format
+    };
+    
+    console.log(`Daily word saved: ${data.word}, at: ${new Date().toLocaleString('en-US', options)}`);
+  } catch (error) {
+    console.error("Error with the /updateDatabase request:", error);
+  }
+};
+
+// Start the server
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+
+  // Call the function immediately when the server starts
+  callUpdateDatabase();
+
+  // Set a timeout to call the function every 24 hours (86400000 milliseconds)
+  setInterval(callUpdateDatabase, 24 * 60 * 60 * 1000);
 });
