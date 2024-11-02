@@ -276,6 +276,7 @@ pastWordsBtn.addEventListener("click", () => {
   })
   .then(data => {
     let i = 1;
+    wordContainer.innerHTML = '';
     while (i < 8 && data[i]) {
       wordContainer.innerHTML += `<div class="wordsPastContainer"><p class="pastDays">${i} days ago</p><p class="wordsFromThePast">" ${data[i].word.toUpperCase()} "</p></div>`;
       i++;

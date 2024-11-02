@@ -93,12 +93,16 @@ main {
   color: white;
   text-align: center;
   width: 50vw;
+  align-items: center;
 }
 
 #keyboardContainer table {
   width: 100%;
   border-collapse: separate;
   border-spacing: 5px; /* Adds space between keys */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #keyboardContainer tr {
